@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="card text-center mt-4">
+        <div class="card-body">
+
+            <h4 class="card-title text-center mb-4 mt-1">Are You Sure You Want To Delete Task?</h4>
+            <p class="text-danger text-center">{{todo.title}}</p>
+            <hr>
+
+            <form method="POST" action=""> {% csrf_token %}
+                <input type="submit" name="Delete" value="Delete" class="btn btn-sm btn-outline-danger">
+            </form>
+
+            <div class="mt-4">
+                <a href="/">Cancel</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

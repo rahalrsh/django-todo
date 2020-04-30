@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="mt-4 mb-4">
+        <div class="card text-center">
+            <div class="card-header">
+                Add New Task
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/">
+                    {% csrf_token %}
+                    <!--{{todo_create_form | crispy}}-->
+                    {{ todo_create_form.title | as_crispy_field }}
+                    {{ todo_create_form.description | as_crispy_field }}
+                    <input type="submit" value="Add Task" class="btn btn-primary btn-block">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <ul class="list-group">
+        {% for todo in todos %}
+            <li class="list-group-item">
+                <div class="d-flex flex-row">
+                    <div class="ml-2 row justify-content-center align-self-center">
+                        {% if todo.done == True %}
+                            <strike>{{todo.title}}</strike>
+                        {% else %}
+                            <span>{{todo.title}}</span>
+                        {% endif %}
+                    </div>
+                    <div class="ml-auto p-2">
+                        <a href="{{todo.get_update_url}}" class="btn btn-sm btn-outline-info">Update</a>
+                        <a href="{{todo.get_delete_url}}" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </div>
+                </div>
+            </li>
+            <br>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endblock %}

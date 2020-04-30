@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="card mb-4 mt-4">
+        <div class="card-body">
+            <h4 class="card-title text-center mb-4 mt-1">Update Task</h4>
+            <p class="text-info text-center">{{todo.title}}</p>
+            <hr>
+
+            <form method="POST" action=""> {% csrf_token %}
+                {{ update_form.title | as_crispy_field}}
+                {{ update_form.description | as_crispy_field}}
+                {{ update_form.done | as_crispy_field}}
+                <input type="submit" name="Update" value="Update" class="btn btn-sm btn-outline-info btn-block">
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}
